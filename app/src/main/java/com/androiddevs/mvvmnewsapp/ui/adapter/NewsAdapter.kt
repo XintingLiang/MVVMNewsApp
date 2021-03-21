@@ -1,7 +1,6 @@
-package com.androiddevs.mvvmnewsapp.ui
+package com.androiddevs.mvvmnewsapp.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.OrientationEventListener
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
