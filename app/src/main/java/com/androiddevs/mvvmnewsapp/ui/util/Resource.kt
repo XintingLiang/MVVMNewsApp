@@ -1,5 +1,6 @@
 package com.androiddevs.mvvmnewsapp.ui.util
 
+//<T> refers to any type
 sealed class Resource<T>(
     val data : T? = null,
     val message : String? = null
