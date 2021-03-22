@@ -9,4 +9,7 @@ class NewsRepository (
     // why suspend? because the net call function is a suspend function, getting breaking news from api
     suspend fun getBreakingNews(countryCode: String, pageNumber: Int)=
         RetrofitInstance.api.getBreakingNews(countryCode,pageNumber)
+
+    suspend fun searchForNews(searchQuery: String, pageNumber: Int)=
+        RetrofitInstance.api.searchForNews(searchQuery,pageNumber)
 }
