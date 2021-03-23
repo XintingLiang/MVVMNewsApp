@@ -3,6 +3,7 @@ package com.androiddevs.mvvmnewsapp.ui.fragments
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebViewClient
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -27,9 +28,15 @@ class ArticleFragment: Fragment(R.layout.fragment_article) {
         viewModel = (activity as NewsActivity).viewModel
 
         val article = args.article
+        println("baobaoissleepy.article: $article")
         webView.apply {
             webViewClient= WebViewClient()
             loadUrl(article.url)
+        }
+
+        fab.setOnClickListener {
+            viewModel.upsertArticle(article)
+            Toast.makeText(activity,"successfully saved article", Toast.LENGTH_LONG).show()
         }
     }
 
