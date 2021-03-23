@@ -5,7 +5,7 @@ import androidx.room.*
 import com.androiddevs.mvvmnewsapp.ui.model.Article
 
 
-@Database(entities = [Article::class],version = 1)
+@Database(entities = [Article::class], version = 2)
 @TypeConverters(Converters::class)
 
 abstract class ArticlesDatabase: RoomDatabase() {
@@ -34,6 +34,8 @@ abstract class ArticlesDatabase: RoomDatabase() {
                 context.applicationContext,
                 ArticlesDatabase::class.java,
                 "article_db.db"
-            ).build()
+            )
+                .fallbackToDestructiveMigration()
+                .build()
     }
 }// this instance of the database will be used to access the articleDao, which has the actual database functions
