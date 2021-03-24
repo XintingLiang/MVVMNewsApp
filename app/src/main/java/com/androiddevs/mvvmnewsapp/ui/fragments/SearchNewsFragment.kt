@@ -40,7 +40,7 @@ class SearchNewsFragment: Fragment(R.layout.fragment_search_news) {
 
         var job : Job? = null
         etSearch.addTextChangedListener {editable->
-            job?.cancel()
+            job?.cancel()// whenever the user types in new letter, all the previous results will be cancel
             job= MainScope().launch {
                 delay(SEARCH_TIME_DELAY)
                 editable?.let {
