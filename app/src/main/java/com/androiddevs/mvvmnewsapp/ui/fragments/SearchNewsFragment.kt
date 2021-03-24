@@ -13,7 +13,7 @@ import com.androiddevs.mvvmnewsapp.ui.adapter.NewsAdapter
 import com.androiddevs.mvvmnewsapp.ui.ui.NewsActivity
 import com.androiddevs.mvvmnewsapp.ui.ui.NewsViewModel
 import com.androiddevs.mvvmnewsapp.ui.util.Constants.Companion.SEARCH_TIME_DELAY
-import com.androiddevs.mvvmnewsapp.ui.util.Resource
+import com.androiddevs.mvvmnewsapp.ui.util.State
 import kotlinx.android.synthetic.main.fragment_search_news.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
@@ -50,23 +50,28 @@ class SearchNewsFragment: Fragment(R.layout.fragment_search_news) {
                 }
             }
         }
+        // S - 5th
+        // Sw
+        // Swe
+        // Swed
+        // Sweden
 
         viewModel.searchNews.observe(viewLifecycleOwner, Observer { resourceResponse->
             when(resourceResponse){
-                is Resource.Success-> {
+                is State.Success-> {
                     hideProgressBar()
                     resourceResponse.data?.let {
                         newsadapter.diff.submitList(it.articles)
                     }
                 }
-                is Resource.Error->{
+                is State.Error->{
                     hideProgressBar()
                     resourceResponse.message?.let {
                         Log.e("Error", "an error occured : $it")
                     }
                 }
 
-                is Resource.Loading->{
+                is State.Loading->{
                     showProgressBar()
                 }
             }
