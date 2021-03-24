@@ -43,10 +43,12 @@ class SavedNewsFragment: Fragment(R.layout.fragment_saved_news) {
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
             ): Boolean {
+                println("baobao.itemTouchHelper.onMove!!")
                 return true
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                println("baobao.itemTouchHelper.onSwipe!!")
                 val position = viewHolder.adapterPosition
                 val article = newsAdapter.diff.currentList[position]
                 viewModel.deleteArticle(article)
