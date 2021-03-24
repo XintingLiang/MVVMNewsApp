@@ -5,14 +5,13 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.androiddevs.mvvmnewsapp.R
 import com.androiddevs.mvvmnewsapp.ui.adapter.NewsAdapter
 import com.androiddevs.mvvmnewsapp.ui.ui.NewsActivity
 import com.androiddevs.mvvmnewsapp.ui.ui.NewsViewModel
-import com.androiddevs.mvvmnewsapp.ui.util.Resource
+import com.androiddevs.mvvmnewsapp.ui.util.State
 import kotlinx.android.synthetic.main.fragment_breaking_news.*
 
 class BreakingNewsFragment: Fragment(R.layout.fragment_breaking_news) {
@@ -32,21 +31,21 @@ class BreakingNewsFragment: Fragment(R.layout.fragment_breaking_news) {
 
        viewModel.breakingNews.observe(viewLifecycleOwner, Observer {resourceResponse->
            when(resourceResponse){
-               is Resource.Success-> {
+               is State.Success-> {
                    hideProgressBar()
                    resourceResponse.data?.let {newsReponse->
                        newsAdapter.diff.submitList(newsReponse.articles)
                    }
                }
 
-               is Resource.Error->{
+               is State.Error->{
                    hideProgressBar()
                    resourceResponse.message?.let {
                        Log.e("Error", "an error occured : $it")
                    }
                }
 
-               is Resource.Loading->{
+               is State.Loading->{
                    showProgressBar()
                }
            }
