@@ -77,7 +77,7 @@ class BreakingNewsFragment: Fragment(R.layout.fragment_breaking_news) {
         rvBreakingNews.apply{
             adapter=newsAdapter
             layoutManager=LinearLayoutManager(activity)
-            addOnScrollListener(this@BreakingNewsFragment.scrollListener)// apply scrollListener
+            addOnScrollListener(this@BreakingNewsFragment.scrollListener)// apply scrollListener??
         }
     }
 
