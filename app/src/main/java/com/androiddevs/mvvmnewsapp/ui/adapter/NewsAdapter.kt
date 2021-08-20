@@ -30,9 +30,9 @@ class NewsAdapter:RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
     val diff = AsyncListDiffer(this, diffUtilCallBack)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
-            return ArticleViewHolder(
-                LayoutInflater.from(parent.context).inflate(R.layout.item_article_preview, parent,false)
-            )
+        return ArticleViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_article_preview, parent,false)
+        )
     }
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
@@ -57,9 +57,10 @@ class NewsAdapter:RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
 
     // don't get this at all, but in the MarsProperty project, this was also implemented
     // this variable takes the lambda function as the value
+    // the lambda function is taking the Article as parameter, but will return an unit(nothing)
     private var onItemClickListener : ((Article)->Unit)? = null
 
-    // this never get called
+    //
     fun setOnItemClickListener (listener: (Article)-> Unit){
         onItemClickListener = listener
     }

@@ -35,15 +35,19 @@ class BreakingNewsFragment: Fragment(R.layout.fragment_breaking_news) {
        viewModel.breakingNews.observe(viewLifecycleOwner, Observer {resourceResponse->
            when(resourceResponse){
                is State.Success-> {
+                   println("baobao4.articles size: ${resourceResponse.data?.articles?.size}")
+                   println("baobao4.totalResults: ${resourceResponse.data?.totalResults}")
+
                    hideProgressBar()
                    resourceResponse.data?.let {newsReponse->
-                       newsAdapter.diff.submitList(newsReponse.articles.toList())
+                       newsAdapter.diff.submitList(newsReponse.articles.toList())// submit list accepts only list, not mutableList, mutableList is the parent/ sibling(not the same type )
 
                        // if it's the last page already, we don't paginate any more
                        // total result is the result we get from the api NewsResponse
                        // when we divide, we round off, that's 1, and the last page should always be empty, so we add 2
-                       val totalPage = newsReponse.totalResults / QUERY_PAGE_SIZE +2
+                       val totalPage = newsReponse.totalResults / QUERY_PAGE_SIZE +2// total result might be wrong
                        isLastPage = viewModel.breakingNewsPage == totalPage
+                       // If data.articles.size % QUERY_PAGE_SIZE != 0
                    }
                }
 
@@ -77,20 +81,20 @@ class BreakingNewsFragment: Fragment(R.layout.fragment_breaking_news) {
         rvBreakingNews.apply{
             adapter=newsAdapter
             layoutManager=LinearLayoutManager(activity)
-            addOnScrollListener(this@BreakingNewsFragment.scrollListener)// apply scrollListener??
         }
+        rvBreakingNews.addOnScrollListener(adapter)// apply scrollListener?? specify the name we are talking this@BreakingNewsFragment
     }
 
     var isLoading = false
     var isLastPage = false
     var isScrolling = false
 
-    val scrollListener = object: RecyclerView.OnScrollListener(){
+    val adapter = object: RecyclerView.OnScrollListener(){
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             super.onScrollStateChanged(recyclerView, newState)
             // if we are scrolling
             if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL){
-                 isScrolling=true
+                isScrolling=true
             }
         }
 
